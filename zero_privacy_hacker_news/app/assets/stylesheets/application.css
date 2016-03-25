@@ -13,3 +13,7 @@
  *= require_tree .
  *= require_self
  */
+.comment_body {
+    padding-left: 10px;
+    background-color: rgba(0,0,0,0.1);
+}

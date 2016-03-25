@@ -4,6 +4,11 @@
 
 <%= javascript_tag do %>
     $(function() {
-       App.start();
+        App.start();
+
+        // if the current route fragment is not our index, than we want to route to that fragment
+        var fragment = Backbone.history.getFragment();
+        App.router.navigate("", {replace: true, trigger: false}); // replace so that we don't break back button
+        App.router.navigate(fragment, {trigger: true});
     });
 <% end %>
