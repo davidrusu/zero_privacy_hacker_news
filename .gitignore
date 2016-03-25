@@ -6,7 +6,6 @@ capybara-*.html
 /db/*.sqlite3
 /db/*.sqlite3-journal
 
-/zero_privacy_hacker_news/pgdata
 /public/system
 /coverage/
 /spec/tmp

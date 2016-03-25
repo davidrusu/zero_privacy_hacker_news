@@ -10,4 +10,4 @@ App.module "HeaderApp.Show", (Show, App, Backbone, Marionette, $, _) ->
     console.log "This is headerapp.show"
 
     class Show.Header extends Marionette.ItemView
-        template: "<p> This is a header </p>"
+        template: "<div> This is a header </p>"
