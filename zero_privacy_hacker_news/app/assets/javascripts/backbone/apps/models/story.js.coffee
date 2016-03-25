@@ -11,7 +11,8 @@ App.module "Model", (Model, App, Backbone, Marionette, $, _) ->
         url: -> ITEM_URL + @id + ".json"
         initialize: (id) ->
             @set 'id', id
-            @fetch() # fetch the comment from HN
+            @fetch
+                success: -> App.trigger 'sync'
         
         parse: (comment) ->
             console.log 'parsing', comment

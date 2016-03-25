@@ -7,7 +7,7 @@ App.module "StoryApp.Show", (Show, App, Backbone, Marionette, $, _) ->
         
         getStoryView: -> new Show.Comments
             collection: App.Model.currentComments
-
+    
 
     class Show.Comment extends Marionette.CompositeView
         childView: Show.Comment
@@ -21,6 +21,8 @@ App.module "StoryApp.Show", (Show, App, Backbone, Marionette, $, _) ->
             @collection = @model.get "kids"
 
         serializeModel: (model) ->
+            if not model.get 'text'
+                console.log "NO TEXT"
             result = 
                 id: model.attributes.id
                 text: model.attributes.text
@@ -37,7 +39,7 @@ App.module "StoryApp.Show", (Show, App, Backbone, Marionette, $, _) ->
             "change": "modelChanged"
 
         modelChanged: ->
-                
+            console.log 'modelChanged'
         
         
     class Show.Comments extends Marionette.CollectionView

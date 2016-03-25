@@ -8,9 +8,9 @@ App.module "Router", (Router, App, Backbone, Marionette, _) ->
             story.fetch success: -> 
                 App.Model.currentStory = story
                 App.Model.currentComments = new App.Model.Comments (story.get "kids"), false
-                App.Model.currentComments.map (comment) -> comment.fetch success: ->
-                    App.StoryApp.Show.Controller.showStory()
+                App.Model.currentComments.map (comment) -> comment.fetch()
             
+            App.on 'sync', -> App.StoryApp.Show.Controller.showStory()
         mainPage: ->
             App.mainRegion.show new App.MainApp
         
