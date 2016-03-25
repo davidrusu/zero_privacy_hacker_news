@@ -1,8 +1,6 @@
-
-
 App.module "MainApp.Show", (Show, App, Backbone, Marionette, $, _) ->
     TOP_STORIES_URL = "https://hacker-news.firebaseio.com/v0/topstories.json"
-    ITEM_URL = "https://hacker-news.firebaseio.com/v0/item"
+    ITEM_URL = "https://hacker-news.firebaseio.com/v0/item/"
     NUM_SHOWN = 10
 
     Show.Controller =
@@ -12,52 +10,44 @@ App.module "MainApp.Show", (Show, App, Backbone, Marionette, $, _) ->
             
 
         getMainView: ->
-            posts = new Show.PostsModel
-            posts.add new Show.PostModel 1
-            main = new Show.Main collection: posts
+            stories = new Show.StoriesModel
+            main = new Show.Main collection: stories
             
-            main.collection.add new Show.PostModel 2
             main.collection.fetch()
             main
 
     console.log "This is mainapp.show"
 
-    class Show.PostModel extends Backbone.Model
-            url: () ->
-                    u = ITEM_URL + "/" + @id + ".json"
-                    console.log u
-                    u
+    class Show.StoryModel extends Backbone.Model
+            url: () -> ITEM_URL + @id + ".json"
 
             initialize: (id) ->
-                    console.log id
                     @id id
-                    @fetched = true
-                    @fetch()
-        
-            fetched: false
+                    @fetch() # fetch the story with this id
             
             id: (id) -> @set id: id
 
 
-    class Show.PostsModel extends Backbone.Collection
+    class Show.StoriesModel extends Backbone.Collection
             url: TOP_STORIES_URL
-            model: Show.PostModel
+            model: Show.StoryModel
             parse: (data) ->
                     _.take(data, NUM_SHOWN)
 
-    class Show.Post extends Marionette.ItemView
+    class Show.Story extends Marionette.ItemView
+            className: "story"
             template: (model) ->
                 "
-                <div class=\"post_title\">
+                <div class=\"story_title\">
                   <a href=\"#{model.url}\"> #{model.title} </a>
                 </div>
-                <div class=\"post_author\">
+                <button class=\"story_author\">
                   #{model.by}
-                </div>
+                </button>
                 "
 
     class Show.Main extends Marionette.CollectionView
-        childView: Show.Post
+        childView: Show.Story
         collectionEvents:
                 "sync": "render"
 
