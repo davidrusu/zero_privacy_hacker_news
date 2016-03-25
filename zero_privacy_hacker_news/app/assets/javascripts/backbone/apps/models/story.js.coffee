@@ -15,3 +15,7 @@ App.module "Model", (Model, App, Backbone, Marionette, $, _) ->
         url: TOP_STORIES_URL
         model: Model.Story
         parse: (data) -> _.take(data, NUM_SHOWN)
+
+    Model.stories = new Model.Stories
+    Model.stories.fetch()
+

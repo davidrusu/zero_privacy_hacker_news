@@ -5,23 +5,25 @@ App.module "MainApp.Show", (Show, App, Backbone, Marionette, $, _) ->
             mainView = @getMainView()
             App.mainRegion.show mainView
             
-        getMainView: ->
-            stories = new App.Model.Stories
-            main = new Show.Main collection: stories
-            main.collection.fetch() # load the top stories from HN
-            
-            main
+        getMainView: -> new Show.Main collection: App.Model.stories
 
     class Show.Story extends Marionette.ItemView
             className: "story"
             template: (model) ->
+                if not model.title
+                    return "Story is loading"
+                
+                comment_count = if model.kids then model.kids.length else "No comments"
+
                 "
+                <div class=\"story_score\"> #{model.score} </div>
                 <div class=\"story_title\">
                   <a href=\"#{model.url}\"> #{model.title} </a>
                 </div>
                 <button class=\"story_author\">
                   #{model.by}
                 </button>
+                <button class=\"story_comments\"> #{comment_count} </button>
                 "
 
     class Show.Main extends Marionette.CollectionView
