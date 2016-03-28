@@ -1,0 +1,48 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+
+
+ */
+
+html, body {
+    background-color: rgba(246, 246, 239, 1);
+    margin: 0px;
+}
+
+#header-region {
+    width: 100%;
+    height: 20px;
+    background-color: rgba(255, 102, 0, 1);
+}
+
+.comment_body {
+    padding: 5px;
+    padding-left: 20px;
+    background-color: rgba(0,0,0,0.05);
+    margin: 5px;
+    border-radius: 3px;
+}
+
+.story {
+    margin: 5px;
+    padding: 10px;
+}
+.story_score {
+    display: inline-block;
+    vertical-align: middle;
+    width: 30px;
+}
+.story_details {
+    display: inline-block;
+    vertical-align: middle;
+}

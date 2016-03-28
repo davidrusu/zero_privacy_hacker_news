@@ -1,0 +1,19 @@
+
+db:
+  image: postgres
+  environment:
+    POSTGRES_PASSWORD: docker
+    POSTGRES_USER: docker
+
+web:
+  build: .
+  command: rails server -p 3000 -b '0.0.0.0' -e production
+  volumes:
+    - .:/zphn
+  ports:
+    - "3000:3000"
+  links:
+    - db
+  environment:
+    DB_URL: postgres://docker:docker@172.17.0.4:5432
+    SECRET_KEY_BASE: 36eb31eec9ae30e86c780618a815c1c485ca9d662bb5cb4f28f9b3b2f7e7b5438d4ffa0c149dab1e27960f8b5007b03efae1493ab34f9ff6c42fd3644976b7b1

@@ -1,0 +1,3 @@
+
+rake assets:precompile
+

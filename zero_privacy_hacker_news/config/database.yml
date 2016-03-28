@@ -80,6 +80,7 @@ test:
 #
 production:
   <<: *default
-  database: zero_privacy_hacker_news_production
-  username: zero_privacy_hacker_news
-  password: <%= ENV['ZERO_PRIVACY_HACKER_NEWS_DATABASE_PASSWORD'] %>
+  url: <%= ENV['DB_URL'] %>
+#  database: zero_privacy_hacker_news_production
+#  username: zero_privacy_hacker_news
+#  password: <%= ENV['ZERO_PRIVACY_HACKER_NEWS_DATABASE_PASSWORD'] %>
