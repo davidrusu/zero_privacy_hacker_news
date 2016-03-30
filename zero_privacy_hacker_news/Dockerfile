@@ -6,4 +6,4 @@ ADD Gemfile /zphn/Gemfile
 ADD Gemfile.lock /zphn/Gemfile.lock
 RUN bundle install
 ADD . /zphn
-RUN rake assets:precompile
+# RUN rake assets:precompile

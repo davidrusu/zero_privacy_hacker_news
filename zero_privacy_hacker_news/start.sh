@@ -1,3 +1,9 @@
+#! /usr/bin/bash
+set -e
 
-rake assets:precompile
+export DATABASE_URL="postgres://$ZEROPRIVACYHACKERNEWS_DB_1_ENV_POSTGRES_USER:$ZEROPRIVACYHACKERNEWS_DB_1_ENV_POSTGRES_PASSWORD@$ZEROPRIVACYHACKERNEWS_DB_1_PORT"
+
+echo $DATABASE_URL
+
+rails server -p 80 -b '0.0.0.0' -e production -P tmp/pids/$HOSTNAME.pid
 
