@@ -1,0 +1,18 @@
+#! /usr/bin/env bash
+
+# Usage: env `bash command`
+# eg. env rails server
+#
+# Runs the given command with environment variables set.
+# Status code will be the status code of the command that was run
+
+DB_USER=$ZEROPRIVACYHACKERNEWS_DB_1_ENV_POSTGRES_USER
+DB_PASS=$ZEROPRIVACYHACKERNEWS_DB_1_ENV_POSTGRES_PASSWORD
+
+URL=${ZEROPRIVACYHACKERNEWS_DB_1_PORT:6} # strip off the 'tcp://' part of the db url
+
+export DATABASE_URL="postgres://$DB_USER:$DB_PASS@$URL"
+
+echo "Running '$@'"
+
+bash -c $@
