@@ -9,6 +9,8 @@ App.module "StoryApp.Show", (Show, App, Backbone, Marionette, $, _) ->
 
     class Show.Comment extends Marionette.CompositeView
         childView: Show.Comment
+        modelEvents:
+            "sync": "render"
         
         template: (model) ->
             if model.text

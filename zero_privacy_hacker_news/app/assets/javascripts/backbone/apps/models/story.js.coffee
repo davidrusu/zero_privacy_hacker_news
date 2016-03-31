@@ -11,8 +11,7 @@ App.module "Model", (Model, App, Backbone, Marionette, $, _) ->
         url: -> ITEM_URL + @id + ".json"
         initialize: (id) ->
             @set 'id', id
-            @fetch
-                success: -> App.trigger 'sync'
+            @fetch()
         
         parse: (comment) ->
             kidsData = if comment.kids then comment.kids else []
