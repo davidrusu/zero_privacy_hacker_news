@@ -19,6 +19,5 @@ App.module "Router", (Router, App, Backbone, Marionette, _) ->
         mainPage: ->
             console.log 'routing to main page'
             App.MainApp.trigger 'start'
-            #App.MainApp.Show.Controller.showMain()
         
     App.router = new Router

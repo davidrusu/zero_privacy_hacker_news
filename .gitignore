@@ -34,3 +34,5 @@ bower.json
 
 # Ignore pow environment settings
 .powenv
+
+zero_privacy_hacker_news/public/assets/

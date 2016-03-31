@@ -8,4 +8,6 @@ if [ -e $PID_FILE ]; then
     rm $PID_FILE
 fi
 
+rake assets:precompile
+
 rails server -p 80 -b '0.0.0.0' -e production -P $PID_FILE

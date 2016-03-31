@@ -13,6 +13,7 @@ DB_PASS=$ZEROPRIVACYHACKERNEWS_DB_1_ENV_POSTGRES_PASSWORD
 DB_URL=${ZEROPRIVACYHACKERNEWS_DB_1_PORT:6} # strip off the 'tcp://' part of the db url
 
 export DATABASE_URL="postgres://$DB_USER:$DB_PASS@$DB_URL"
+export RAILS_ENV="production"
 
 echo "Running '$@'"
 # run the command, $@ store the entire argument string unparsed
