@@ -20,10 +20,11 @@ App.module "Router", (Router, App, Backbone, Marionette, _) ->
             # 
             # This way we don't have to wait for the entire page to
             # load before we can start interacting
-            App.on 'sync', -> App.StoryApp.Show.Controller.showStory()
+            App.on 'sync', -> App.StoryApp.trigger 'start'
             
         mainPage: ->
             console.log 'routing to main page'
-            App.MainApp.Show.Controller.showMain()
+            App.MainApp.trigger 'start'
+            #App.MainApp.Show.Controller.showMain()
         
     App.router = new Router

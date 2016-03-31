@@ -15,7 +15,6 @@ App.module "Model", (Model, App, Backbone, Marionette, $, _) ->
                 success: -> App.trigger 'sync'
         
         parse: (comment) ->
-            console.log 'parsing', comment
             kidsData = if comment.kids then comment.kids else []
             result =
                 kids: new Model.Comments kidsData

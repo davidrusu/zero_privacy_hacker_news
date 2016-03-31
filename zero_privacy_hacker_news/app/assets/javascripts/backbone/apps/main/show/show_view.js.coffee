@@ -5,13 +5,14 @@ App.module "MainApp.Show", (Show, App, Backbone, Marionette, $, _) ->
             mainView = @getMainView()
             App.mainRegion.show mainView
         
-        getMainView: -> new Show.Main collection: App.Model.stories
+        getMainView: ->
+            new Show.Main collection: App.Model.stories
 
     class Show.Story extends Marionette.ItemView
         className: "story"
         template: (model) ->
             if not model.title
-                return "Story is loading"
+                return '<div class="loader">Loading...</div>'
             
             comment_button_msg =
                 if model.kids then "comments" else "no comments"
@@ -36,10 +37,11 @@ App.module "MainApp.Show", (Show, App, Backbone, Marionette, $, _) ->
         onRender: ->
             model = @model
             @ui.comments.click ->
-                    route = "story/#{model.id}"
-                    console.log "hey", App.router
-                    App.router.navigate route
+                route = "story/#{model.id}"
+                App.router.navigate route
+            
             _.bind @ui.comments.click, @
+    
     class Show.Main extends Marionette.CollectionView
         childView: Show.Story
         collectionEvents:

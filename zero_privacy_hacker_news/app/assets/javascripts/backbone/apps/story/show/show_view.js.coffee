@@ -11,7 +11,10 @@ App.module "StoryApp.Show", (Show, App, Backbone, Marionette, $, _) ->
         childView: Show.Comment
         
         template: (model) ->
-                "<div class=\"comment_body\"> #{model.text}</div>"
+            if model.text
+                return "<div class=\"comment_body\"> #{model.text} </div>"
+            else
+                return '<div class="loader">Loading...</div>'
         
         initialize: ->
             @collection = @model.get "kids"

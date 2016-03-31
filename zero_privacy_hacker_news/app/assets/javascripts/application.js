@@ -11,7 +11,6 @@
 // about supported directives.
 //
 //= require jquery
-//= require turbolinks
 //= require ./lib/underscore-min.js
 //= require ./lib/backbone.js
 //= require ./lib/backbone.marionette.js
