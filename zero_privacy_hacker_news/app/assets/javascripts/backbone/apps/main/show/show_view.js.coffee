@@ -18,15 +18,15 @@ App.module "MainApp.Show", (Show, App, Backbone, Marionette, $, _) ->
                 if model.kids then "comments" else "no comments"
             
             "
-            <div class=\"story_score\"> #{model.score} </div>
-            <div class=\"story_details\"> 
-              <div class=\"story_title\">
-                <a href=\"#{model.url}\"> #{model.title} </a>
+            <div class='story_score'> #{model.score} </div>
+            <div class='story_details'> 
+              <div class='story_title'>
+                <a href='#{model.url}'> #{model.title} </a>
               </div>
-              <button class=\"story_author\">
+              <a class='story_author' href='#user/#{model.by}'>
                 #{model.by}
-              </button>
-              <a href=\"#story/#{model.id}\">#{comment_button_msg}</a>
+              </a>
+              <a href='#story/#{model.id}'>#{comment_button_msg}</a>
             </div>
             "
 
