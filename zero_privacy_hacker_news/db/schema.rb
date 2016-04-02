@@ -11,10 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160401225559) do
+ActiveRecord::Schema.define(version: 20160402210504) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "sessions", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "session_id"
+    t.datetime "expires"
+  end
+
+  add_index "sessions", ["session_id"], name: "index_sessions_on_session_id", using: :btree
+  add_index "sessions", ["user_id"], name: "index_sessions_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string "username"

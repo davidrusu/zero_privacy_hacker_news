@@ -8,9 +8,12 @@ class UserController < ApplicationController
   def index
     @user = User.find_by username: params[:username]
     if @user && @user.authenticate(params[:password])
-      session[:user_id] = @user.id
-      logger.debug "User session #{session[:user_id]}"
-      render json: { message: "Auth successful"}
+      session_id = Session.create_session @user
+      logger.debug "User session #{session_id}"
+      render json: {
+               message: "Auth successful",
+               session: session_id
+             }
     else
       logger.debug "Auth failed"
       render json: { message: "Auth failed"}
@@ -22,9 +25,13 @@ class UserController < ApplicationController
       username: params[:username],
       password: params[:password]
     )
-    
     if @user.save
-      render json: @user.as_json
+      
+      session_id = Session.create_session @user
+      render json: {
+               user: @user.as_json,
+               session: session_id
+             }
     else
       render json: { message: "Failed to create user" }
     end
