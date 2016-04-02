@@ -5,5 +5,4 @@ class Interaction < ActiveRecord::Base
   belongs_to :user
 
   validates :hn_item, presence: true
-  validates :user_id, presence: true
 end
