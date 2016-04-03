@@ -55,8 +55,8 @@ App.module "HeaderApp.Show", (Show, App, Backbone, Marionette, $, _) ->
                 
                 if not session
                     logout.hide() 
-                    username = $('<input id="uname_input" type="text">')
-                    password = $('<input id="pass_input" type="password">')
+                    username = $('<input id="uname_input" type="text" placeholder="username">')
+                    password = $('<input id="pass_input" type="password" placeholder="password">')
                     button = $('<button>Login or Register</button>')
                     button.click ->
                         Show.Controller.login(
@@ -65,7 +65,7 @@ App.module "HeaderApp.Show", (Show, App, Backbone, Marionette, $, _) ->
                         )
                     
                     popup = popup
-                              .append($('<h3>You havent logged in!</h3>'))
+                              .append($("<h3>You aren't logged in!</h3>"))
                               .append($('<p>login or create an account.</p>'))
                               .append(username)
                               .append($('<br>'))
