@@ -1,4 +1,5 @@
 @App.module "StoryApp", (StoryApp, App, Backbone, Marionette, $, _) ->
-        @startWithParent = false;
-        StoryApp.on "start", -> StoryApp.Show.Controller.showStory()
+        StoryApp.API =
+            showStory: (story) ->
+                StoryApp.Show.Controller.showStory(story)
 

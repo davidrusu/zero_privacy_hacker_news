@@ -1,11 +1,16 @@
 App.module "StoryApp.Show", (Show, App, Backbone, Marionette, $, _) ->
     Show.Controller =
-        showStory: ->
-            mainView = @getStoryView()
+        showStory: (story) ->
+            mainView = @getStoryView(story)
             App.mainRegion.show mainView
         
-        getStoryView: -> new Show.Comments
-            collection: App.Model.currentComments
+        getStoryView: (story) ->
+            # fetch each top level comment, a fetch of a top level
+            # comment will trigger the a fetch for all the child comments
+            comments = new App.Model.Comments (story.get "kids"), false
+            comments.map (comment) -> comment.fetch()
+            
+            new Show.Comments collection: comments
 
     class Show.Comment extends Marionette.CompositeView
         childView: Show.Comment
