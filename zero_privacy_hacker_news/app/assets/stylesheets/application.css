@@ -72,6 +72,20 @@ a {
     vertical-align: middle;
 }
 
+#login_popup {
+    background-color: white;
+    position: fixed;
+    width: 300px;
+    left: 50%;
+    top: 25%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    box-shadow: 0px 2px 5px #000000;
+    padding: 10px;
+}
+		
+    
+
 /* http://projects.lukehaas.me/css-loaders/ */
 .loader {
   font-size: 3px;
