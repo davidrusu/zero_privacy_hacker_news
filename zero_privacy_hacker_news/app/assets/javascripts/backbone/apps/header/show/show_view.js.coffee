@@ -46,39 +46,39 @@ App.module "HeaderApp.Show", (Show, App, Backbone, Marionette, $, _) ->
 
     class Show.Header extends Marionette.ItemView
         template: (data) ->
-                session = window.localStorage.getItem('session')
-                console.log session
-                popup = $('<div id="login_popup">')
+            session = window.localStorage.getItem('session')
+            console.log session
+            popup = $('<div id="login_popup">')
+            
+            logout = $('<button id="logout_btn">logout</button>')
+            logout.click -> Show.Controller.logout()
+            
+            if not session
+                logout.hide() 
+                username = $('<input id="uname_input" type="text" placeholder="username">')
+                password = $('<input id="pass_input" type="password" placeholder="password">')
+                button = $('<button>Login or Register</button>')
+                button.click ->
+                    Show.Controller.login(
+                        $('#uname_input').val(),
+                        $('#pass_input').val()
+                    )
                 
-                logout = $('<button id="logout_btn">logout</button>')
-                logout.click -> Show.Controller.logout()
-                
-                if not session
-                    logout.hide() 
-                    username = $('<input id="uname_input" type="text" placeholder="username">')
-                    password = $('<input id="pass_input" type="password" placeholder="password">')
-                    button = $('<button>Login or Register</button>')
-                    button.click ->
-                        Show.Controller.login(
-                            $('#uname_input').val(),
-                            $('#pass_input').val()
-                        )
-                    
-                    popup = popup
-                              .append($("<h3>You aren't logged in!</h3>"))
-                              .append($('<p>login or create an account.</p>'))
-                              .append(username)
-                              .append($('<br>'))
-                              .append(password)
-                              .append($('<br>'))
-                              .append($('<br>'))
-                              .append(button)
-                else
-                    popup.hide()
-
-                header = $('<span>')
-                    .append($('<div id="hn_logo">Y</div>'))
-                    .append($('<a id="hn_name" href="/">Hacker News</div>'))
-                    .append(logout)
-                    .append(popup)
-                return header
+                popup = popup
+                          .append($("<h3>You aren't logged in!</h3>"))
+                          .append($('<p>login or create an account.</p>'))
+                          .append(username)
+                          .append($('<br>'))
+                          .append(password)
+                          .append($('<br>'))
+                          .append($('<br>'))
+                          .append(button)
+            else
+                popup.hide()
+            
+            header = $('<span>')
+                .append($('<div id="hn_logo">Y</div>'))
+                .append($('<a id="hn_name" href="/">Hacker News</div>'))
+                .append(logout)
+                .append(popup)
+            return header

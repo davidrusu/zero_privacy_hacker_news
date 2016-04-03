@@ -34,6 +34,11 @@ a {
     padding: 2px;
 }
 
+#header-region span {
+    display: block;
+    width: 100%;
+}
+
 #hn_logo {
     display: inline-block;
     width: 20px;
@@ -62,11 +67,13 @@ a {
     margin: 5px;
     padding: 10px;
 }
+
 .story_score {
     display: inline-block;
     vertical-align: middle;
     width: 30px;
 }
+
 .story_details {
     display: inline-block;
     vertical-align: middle;
@@ -83,7 +90,13 @@ a {
     box-shadow: 0px 2px 5px #000000;
     padding: 10px;
 }
-		
+
+#logout_btn {
+    float: right;
+    margin-right: 10px;
+    vertical-align:middle;
+    margin-top: 4px;
+}
     
 
 /* http://projects.lukehaas.me/css-loaders/ */
