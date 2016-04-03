@@ -2,19 +2,23 @@ App.module "HeaderApp.Show", (Show, App, Backbone, Marionette, $, _) ->
     LOGIN_URL="/user"
     
     Show.Controller = 
-        showHeader: ->
-            headerView = @getHeaderView()
+        showHeader: (failedAuth = false) ->
+            headerView = @getHeaderView(failedAuth)
             App.headerRegion.show headerView
 
-        getHeaderView: ->
-            new Show.Header
+        getHeaderView: (failedAuth) ->
+            model = new Backbone.Model failedAuth: failedAuth
+            new Show.Header model: model
 
         logout: ->
             window.localStorage.removeItem('session')
             @showHeader()
 
         login: (uname, pass) ->
-            console.log "logging in with #{uname}, #{pass}"
+            # Attempt to login with the given username and password
+            # If the attempt fails, we try to create a new account
+            # with this password.
+            # If that fails, it means that username is taken
             $.ajax
                 url: LOGIN_URL,
                 data:
@@ -37,15 +41,18 @@ App.module "HeaderApp.Show", (Show, App, Backbone, Marionette, $, _) ->
                             success: ((data) ->
                                 console.log 'created user', data
                                 if data.session
-                                    window.localStorage.setItem('session', data.session)
+                                    window.localStorage.setItem('session',data.session)
+                                    @showHeader()
                                 else
                                     console.log 'failed to create user'
+                                    @showHeader(true)
                                     
-                                @showHeader()).bind @
+                                ).bind @
                 ).bind @
 
     class Show.Header extends Marionette.ItemView
         template: (data) ->
+            console.log data
             session = window.localStorage.getItem('session')
             console.log session
             popup = $('<div id="login_popup">')
@@ -63,6 +70,7 @@ App.module "HeaderApp.Show", (Show, App, Backbone, Marionette, $, _) ->
                         $('#uname_input').val(),
                         $('#pass_input').val()
                     )
+
                 
                 popup = popup
                           .append($("<h3>You aren't logged in!</h3>"))
@@ -73,6 +81,13 @@ App.module "HeaderApp.Show", (Show, App, Backbone, Marionette, $, _) ->
                           .append($('<br>'))
                           .append($('<br>'))
                           .append(button)
+                          
+                if data.failedAuth
+                    username.addClass('failed_auth')
+                    password.addClass('failed_auth')
+                    popup.append($('<p id="bad_auth_msg">').text("User with that name
+                    already exists and that's the wrong password. Feel
+                    free to try again!"))
             else
                 popup.hide()
             

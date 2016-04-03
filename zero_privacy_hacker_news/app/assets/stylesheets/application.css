@@ -79,6 +79,15 @@ a {
     vertical-align: middle;
 }
 
+.failed_auth {
+    border: solid red;
+}
+
+#bad_auth_msg {
+    font-size: 50%;
+    color: red;
+}
+
 #login_popup {
     background-color: white;
     position: fixed;
